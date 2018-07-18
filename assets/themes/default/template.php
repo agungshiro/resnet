@@ -97,10 +97,12 @@
     <?php // Main body ?>
     <div class="container theme-showcase" role="main">
 
+        <!-- No need page title
         <?php // Page title ?>
         <div class="page-header">
             <h1><?php echo $page_header; ?></h1>
         </div>
+        -->
 
         <?php // System messages ?>
         <?php if ($this->session->flashdata('message')) : ?>
