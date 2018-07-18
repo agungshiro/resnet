@@ -1,0 +1,11 @@
+{
+  "name": "resnet",
+  "version": "1.0.0",
+  "description": "**[VIEW THE DEMO](http://ci3-fire-starter.jasonbaier.com)**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
