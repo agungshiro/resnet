@@ -18,6 +18,7 @@ class Public_Controller extends MY_Controller {
         // set up global header data
         $this
             ->add_css_theme("{$this->settings->theme}.css")
+            ->add_css_theme("landing.css")
             ->add_js_theme("{$this->settings->theme}_i18n.js", TRUE);
 
         // declare main template
