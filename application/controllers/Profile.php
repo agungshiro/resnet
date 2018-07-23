@@ -64,7 +64,8 @@ class Profile extends Private_Controller {
         }
 
         // setup page header data
-		$this->set_title(lang('users title profile'));
+        $this->set_title(lang('users title profile'));
+        $this->add_css_theme("profile.css");
 
         $data = $this->includes;
 
@@ -76,7 +77,8 @@ class Profile extends Private_Controller {
         );
 
         // load views
-        $data['content'] = $this->load->view('user/profile_form', $content_data, TRUE);
+        //$data['content'] = $this->load->view('user/profile_form', $content_data, TRUE);
+        $data['content'] = $this->load->view('user/profile', $content_data, TRUE);
         $this->load->view($this->template, $data);
 	}
 

@@ -1,29 +1,16 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Contact extends Admin_Controller {
+class Notification extends Private_Controller {
 
-    /**
-     * @var string
-     */
-    private $_redirect_url;
-
-
-    /**
-     * Constructor
-     */
-    function __construct()
-    {
+    public function __construct() {
         parent::__construct();
 
-        // load the language files
-        $this->lang->load('contact');
-
         // load the users model
-        $this->load->model('contact_model');
+        $this->load->model('notification_model');
 
         // set constants
         define('REFERRER', "referrer");
-        define('THIS_URL', base_url('admin/contact'));
+        define('THIS_URL', base_url('message'));
         define('DEFAULT_LIMIT', $this->settings->per_page_limit);
         define('DEFAULT_OFFSET', 0);
         define('DEFAULT_SORT', "created");
@@ -40,18 +27,8 @@ class Contact extends Admin_Controller {
         }
     }
 
-
-    /**************************************************************************************
-     * PUBLIC FUNCTIONS
-     **************************************************************************************/
-
-
-    /**
-     * Message list page
-     */
-    function index()
-    {
-        // get parameters
+    public function index() {
+        
         $limit  = $this->input->get('limit')  ? $this->input->get('limit', TRUE)  : DEFAULT_LIMIT;
         $offset = $this->input->get('offset') ? $this->input->get('offset', TRUE) : DEFAULT_OFFSET;
         $sort   = $this->input->get('sort')   ? $this->input->get('sort', TRUE)   : DEFAULT_SORT;
@@ -129,7 +106,7 @@ class Contact extends Admin_Controller {
         }
 
         // get list
-        $messages = $this->message_model->get_all($limit, $offset, $filters, $sort, $dir);
+        $messages = $this->contact_model->get_all($limit, $offset, $filters, $sort, $dir);
 
         // build pagination
         $this->pagination->initialize(array(
@@ -164,93 +141,6 @@ class Contact extends Admin_Controller {
         // load views
         $data['content'] = $this->load->view('admin/contact/list', $content_data, TRUE);
         $this->load->view($this->template, $data);
-    }
-
-
-    /**
-     * Export list to CSV
-     */
-    function export()
-    {
-        // get parameters
-        $sort = $this->input->get('sort') ? $this->input->get('sort', TRUE) : DEFAULT_SORT;
-        $dir  = $this->input->get('dir')  ? $this->input->get('dir', TRUE)  : DEFAULT_DIR;
-
-        // get filters
-        $filters = array();
-
-        if ($this->input->get('name'))
-        {
-            $filters['name'] = $this->input->get('name', TRUE);
-        }
-
-        if ($this->input->get('email'))
-        {
-            $filters['email'] = $this->input->get('email', TRUE);
-        }
-
-        if ($this->input->get('title'))
-        {
-            $filters['title'] = $this->input->get('title', TRUE);
-        }
-
-        if ($this->input->get('created'))
-        {
-            $filters['created'] = date('Y-m-d', strtotime(str_replace('-', '/', $this->input->get('created', TRUE))));
-        }
-
-        // get all messages
-        $messages = $this->contact_model->get_all(0, 0, $filters, $sort, $dir);
-
-        if ($messages['total'] > 0)
-        {
-            // export the file
-            array_to_csv($messages['results'], "messages");
-        }
-        else
-        {
-            // nothing to export
-            $this->session->set_flashdata('error', lang('core error no_results'));
-            redirect($this->_redirect_url);
-        }
-
-        exit;
-    }
-
-
-    /**************************************************************************************
-     * AJAX FUNCTIONS
-     **************************************************************************************/
-
-
-    /**
-     * Marks email message as read
-     *
-     * @param  int $id
-     * @return boolean
-     */
-    function read($id=NULL)
-    {
-        if ($id)
-        {
-            $read = $this->contact_model->read($id, $this->user['id']);
-
-            if ($read)
-            {
-                $results['success'] = lang('contact msg updated');
-            }
-            else
-            {
-                $results['error'] = lang('contact error update_failed');
-            }
-        }
-        else
-        {
-            $results['error'] = lang('contact error update_failed');
-        }
-
-        display_json($results);
-        exit;
     }
 
 }

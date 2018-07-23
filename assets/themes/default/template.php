@@ -28,6 +28,7 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -53,9 +54,13 @@
                 <?php // Nav bar left ?>
                 <ul class="nav navbar-nav">
                     <li class="<?php echo (uri_string() == '') ? 'active' : ''; ?>"><a href="<?php echo base_url('/'); ?>"><?php echo lang('core button home'); ?></a></li>
+                    <!--
                     <li class="<?php echo (uri_string() == 'contact') ? 'active' : ''; ?>"><a href="<?php echo base_url('/contact'); ?>"><?php echo lang('core button contact'); ?></a></li>
+                    -->
                     <?php if ($this->session->userdata('logged_in')) : ?>
                         <li class="<?php echo (uri_string() == 'profile') ? 'active' : ''; ?>"><a href="<?php echo base_url('/profile'); ?>"><?php echo lang('core button profile'); ?></a></li>
+                        <li class="<?php echo (uri_string() == 'notification') ? 'active' : ''; ?>"><a href="<?php echo base_url('/notification'); ?>">Notification</a></li>
+                        <li class="<?php echo (uri_string() == 'messages') ? 'active' : ''; ?>"><a href="<?php echo base_url('/messages'); ?>">Messages</a></li>
                     <?php endif; ?>
                 </ul>
                 <?php // Nav bar right ?>
@@ -74,6 +79,7 @@
                             <a href="<?php echo base_url('login'); ?>"><?php echo lang('core button login'); ?></a>
                         </li>
                     <?php endif; ?>
+                    <!--
                     <li>
                         <span class="dropdown">
                             <button id="session-language" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default">
@@ -94,6 +100,7 @@
                             </ul>
                         </span>
                     </li>
+                    -->
                 </ul>
             </div>
         </div>
