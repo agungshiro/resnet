@@ -37,6 +37,24 @@
     </div>
 
     <div class="row">
+        <?php // institution ?>
+        <div class="form-group col-sm-6<?php echo form_error('institution') ? ' has-error' : ''; ?>">
+            <?php echo form_label('Institution', 'institution', array('class'=>'control-label')); ?>
+            <span class="required">*</span>
+            <?php echo form_input(array('name'=>'institution', 'value'=>set_value('institution', (isset($user['institution']) ? $user['institution'] : '')), 'class'=>'form-control', 'type'=>'institution')); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <?php // institution ?>
+        <div class="form-group col-sm-6<?php echo form_error('short_bio') ? ' has-error' : ''; ?>">
+            <?php echo form_label('Short Bio', 'short_bio', array('class'=>'control-label')); ?>
+            <span class="required">*</span>
+            <?php echo form_textarea(array('name'=>'short_bio', 'value'=>set_value('short_bio', (isset($user['short_bio']) ? $user['short_bio'] : '')), 'class'=>'form-control', 'type'=>'short_bio')); ?>
+        </div>
+    </div>
+
+    <div class="row">
         <?php // language ?>
         <div class="form-group col-sm-6<?php echo form_error('language') ? ' has-error' : ''; ?>">
             <?php echo form_label(lang('users input language'), 'language', array('class'=>'control-label')); ?>

@@ -11,10 +11,15 @@
            <img src="http://lorempixel.com/output/people-q-c-100-100-1.jpg" class="img-thumbnail visible-xs picture_mob" />
            <div class="header">
                 <h1><?php echo $user['first_name'].' '.$user['last_name']; ?></h1>
-                <h4>Web Developer</h4>
-                <span>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."</span>
-           </div>
+                <h4><?php echo $user['institution']; ?></h4>
+                <p>
+                <span><?php echo $user['short_bio']; ?></span>
+                </p>
+                <p>
+                <a class="btn btn-primary" href="<?php echo base_url('profile/edit'); ?>" role="button">Edit Profile</a>
+                </p>
+            </div>
+           
         </div>
     </div>   
     

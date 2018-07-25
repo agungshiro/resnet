@@ -72,6 +72,37 @@ class Users_model extends CI_Model {
         return $results;
     }
 
+    function search($kw, $limit=0, $offset=0) {
+        $sql = "
+            SELECT SQL_CALC_FOUND_ROWS *
+            FROM {$this->_db}
+            WHERE deleted = '0' 
+            AND first_name LIKE '%{$kw}%'
+        ";
+
+        if ($limit)
+        {
+            $sql .= " LIMIT {$offset}, {$limit}";
+        }
+
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0)
+        {
+            $results['results'] = $query->result_array();
+        }
+        else
+        {
+            $results['results'] = NULL;
+        }
+
+        $sql = "SELECT FOUND_ROWS() AS total";
+        $query = $this->db->query($sql);
+        $results['total'] = $query->row()->total;
+
+        return $results;
+    }
+
 
     /**
      * Get specific user
@@ -303,6 +334,8 @@ class Users_model extends CI_Model {
                     last_name = " . $this->db->escape($data['last_name']) . ",
                     email = " . $this->db->escape($data['email']) . ",
                     language = " . $this->db->escape($data['language']) . ",
+                    institution = " . $this->db->escape($data['institution']) . ",
+                    short_bio = " . $this->db->escape($data['short_bio']) . ",
                     updated = '" . date('Y-m-d H:i:s') . "'
                 WHERE id = " . $this->db->escape($user_id) . "
                     AND deleted = '0'

@@ -31,86 +31,16 @@ class Notification extends Private_Controller {
         
         $limit  = $this->input->get('limit')  ? $this->input->get('limit', TRUE)  : DEFAULT_LIMIT;
         $offset = $this->input->get('offset') ? $this->input->get('offset', TRUE) : DEFAULT_OFFSET;
-        $sort   = $this->input->get('sort')   ? $this->input->get('sort', TRUE)   : DEFAULT_SORT;
-        $dir    = $this->input->get('dir')    ? $this->input->get('dir', TRUE)    : DEFAULT_DIR;
-
-        // get filters
-        $filters = array();
-
-        if ($this->input->get('name'))
-        {
-            $filters['name'] = $this->input->get('name', TRUE);
-        }
-
-        if ($this->input->get('email'))
-        {
-            $filters['email'] = $this->input->get('email', TRUE);
-        }
-
-        if ($this->input->get('title'))
-        {
-            $filters['title'] = $this->input->get('title', TRUE);
-        }
-
-        if ($this->input->get('created'))
-        {
-            $filters['created'] = date('Y-m-d', strtotime(str_replace('-', '/', $this->input->get('created', TRUE))));
-        }
-
-        // build filter string
-        $filter = "";
-        foreach ($filters as $key => $value)
-        {
-            $filter .= "&{$key}={$value}";
-        }
 
         // save the current url to session for returning
         $this->session->set_userdata(REFERRER, THIS_URL . "?sort={$sort}&dir={$dir}&limit={$limit}&offset={$offset}{$filter}");
 
-        // are filters being submitted?
-        if ($this->input->post())
-        {
-            if ($this->input->post('clear'))
-            {
-                // reset button clicked
-                redirect(THIS_URL);
-            }
-            else
-            {
-                // apply the filter(s)
-                $filter = "";
-
-                if ($this->input->post('name'))
-                {
-                    $filter .= "&name=" . $this->input->post('name', TRUE);
-                }
-
-                if ($this->input->post('email'))
-                {
-                    $filter .= "&email=" . $this->input->post('email', TRUE);
-                }
-
-                if ($this->input->post('title'))
-                {
-                    $filter .= "&title=" . $this->input->post('title', TRUE);
-                }
-
-                if ($this->input->post('created'))
-                {
-                    $filter .= "&created=" . $this->input->post('created', TRUE);
-                }
-
-                // redirect using new filter(s)
-                redirect(THIS_URL . "?sort={$sort}&dir={$dir}&limit={$limit}&offset={$offset}{$filter}");
-            }
-        }
-
-        // get list
-        $messages = $this->contact_model->get_all($limit, $offset, $filters, $sort, $dir);
+        /// get list
+        $messages = $this->notification_model->get_all($this->user['id'], $limit, $offset);
 
         // build pagination
         $this->pagination->initialize(array(
-            'base_url'   => THIS_URL . "?sort={$sort}&dir={$dir}&limit={$limit}{$filter}",
+            'base_url'   => THIS_URL . "?limit={$limit}",
             'total_rows' => $messages['total'],
             'per_page'   => $limit
         ));
@@ -139,7 +69,7 @@ class Notification extends Private_Controller {
         );
 
         // load views
-        $data['content'] = $this->load->view('admin/contact/list', $content_data, TRUE);
+        $data['content'] = $this->load->view('notification/n_list', $content_data, TRUE);
         $this->load->view($this->template, $data);
     }
 
