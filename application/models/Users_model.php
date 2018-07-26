@@ -623,7 +623,26 @@ class Users_model extends CI_Model {
         return FALSE;
     }
 
+    function userid_exists($id)
+    {
+        $sql = "
+            SELECT username
+            FROM {$this->_db}
+            WHERE id = " . $this->db->escape($id) . "
+            LIMIT 1
+        ";
 
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows())
+        {
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
+    
     /**
      * Check to see if an email already exists
      *

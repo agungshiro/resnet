@@ -55,4 +55,31 @@ class Notification_model extends CI_Model {
 
     }
 
+    public function push($data=array()) {
+        
+        if($data) {
+
+            $sql = "
+                INSERT INTO {$this->_db} (
+                    user_id,
+                    message,
+                    datetime
+                ) VALUES (
+                    {$this->db->escape($data['uid'])},
+                    {$this->db->escape($data['msg'])},
+                    '".date("Y-m-d H:i:s")."')
+            ";
+
+            $this->db->query($sql);
+
+            if ($id = $this->db->insert_id())
+            {
+                return $id;
+            }
+
+        }
+
+        return FALSE;
+    }
+
 }

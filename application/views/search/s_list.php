@@ -35,7 +35,7 @@ Aliquam in felis sit amet augue.</p>
             </li>
 			</ul>
             -->
-            <a class="btn btn-primary" href="<?php echo base_url('follow'); ?>" role="button">Follow</a>
+            <a class="btn btn-primary" href="<?php echo base_url('follow?rid='.$item['id']); ?>" role="button">Follow</a>
        </div>
     </div>
   </div>
