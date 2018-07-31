@@ -53,7 +53,12 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <?php // Nav bar left ?>
                 <ul class="nav navbar-nav">
-                    <li class="<?php echo (uri_string() == '') ? 'active' : ''; ?>"><a href="<?php echo base_url('/'); ?>"><?php echo lang('core button home'); ?></a></li>
+                    <!-- HOME BUTTON -->
+                    <?php if ($this->session->userdata('logged_in')) : ?>
+                        <li class="<?php echo (uri_string() == 'timeline') ? 'active' : ''; ?>"><a href="<?php echo base_url('/timeline'); ?>"><?php echo lang('core button home'); ?></a></li>
+                    <?php else: ?>
+                        <li class="<?php echo (uri_string() == '') ? 'active' : ''; ?>"><a href="<?php echo base_url('/'); ?>"><?php echo lang('core button home'); ?></a></li>
+                    <?php endif; ?>
                     <!--
                     <li class="<?php echo (uri_string() == 'contact') ? 'active' : ''; ?>"><a href="<?php echo base_url('/contact'); ?>"><?php echo lang('core button contact'); ?></a></li>
                     -->
@@ -84,6 +89,9 @@
                                 <a href="<?php echo base_url('admin'); ?>"><?php echo lang('core button admin'); ?></a>
                             </li>
                         <?php endif; ?>
+                        <li>
+                            <a href="#"><?php echo $this->user['first_name']." ".$this->user['last_name']; ?></a>
+                        </li>
                         <li>
                             <a href="<?php echo base_url('logout'); ?>"><?php echo lang('core button logout'); ?></a>
                         </li>

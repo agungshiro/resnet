@@ -4,7 +4,7 @@
 <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
 	<div class="row panel">
 		<div class="col-md-4 bg_blur ">
-    	    <a href="#" class="follow_btn hidden-xs">Follow</a>
+            
 		</div>
         <div class="col-md-8  col-xs-12">
            <img src="http://lorempixel.com/output/people-q-c-100-100-1.jpg" class="img-thumbnail picture hidden-xs" />
@@ -16,8 +16,15 @@
                 <span><?php echo $user['short_bio']; ?></span>
                 </p>
                 <p>
-                <a class="btn btn-primary" href="<?php echo base_url('profile/edit'); ?>" role="button">Edit Profile</a>
+                <?php if($this->user['id'] == $user['id']): ?>
+                    <a class="btn btn-primary" href="<?php echo base_url('profile/edit'); ?>" role="button">Edit Profile</a>
+                <?php endif; ?>
                 </p>
+                <?php if($user['relation']) : ?>
+                <a class="btn btn-success" href="#" role="button">Following</a>
+                <?php else: ?>
+                <a class="btn btn-primary" href="<?php echo base_url('follow?rid='.$user['id']); ?>" role="button">Follow</a>
+                <?php endif;  ?>
             </div>
            
         </div>
@@ -26,9 +33,11 @@
 	<div class="row nav">    
         <div class="col-md-4"></div>
         <div class="col-md-8 col-xs-12" style="margin: 0px;padding: 0px;">
+        <!--
             <div class="col-md-4 col-xs-4 well"><i class="fa fa-weixin fa-lg"></i> 16</div>
             <div class="col-md-4 col-xs-4 well"><i class="fa fa-heart-o fa-lg"></i> 14</div>
             <div class="col-md-4 col-xs-4 well"><i class="fa fa-thumbs-o-up fa-lg"></i> 26</div>
+        -->
         </div>
     </div>
 </div>

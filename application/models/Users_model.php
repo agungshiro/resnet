@@ -75,9 +75,12 @@ class Users_model extends CI_Model {
     function search($kw, $limit=0, $offset=0) {
         $sql = "
             SELECT SQL_CALC_FOUND_ROWS *
-            FROM {$this->_db}
+            FROM {$this->_db} u
+            LEFT JOIN friendship f 
+            ON u.id = f.user2 
             WHERE deleted = '0' 
-            AND first_name LIKE '%{$kw}%'
+            AND first_name LIKE '%{$kw}%' 
+            OR last_name LIKE '%{$kw}%' 
         ";
 
         if ($limit)
@@ -116,8 +119,10 @@ class Users_model extends CI_Model {
         {
             $sql = "
                 SELECT *
-                FROM {$this->_db}
-                WHERE id = " . $this->db->escape($id) . "
+                FROM {$this->_db} u
+                LEFT JOIN friendship f 
+                ON u.id = f.user2 
+                WHERE u.id = " . $this->db->escape($id) . "
                     AND deleted = '0'
             ";
 

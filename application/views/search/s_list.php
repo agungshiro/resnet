@@ -7,12 +7,13 @@
     		<img class="media-object" src="http://placekitten.com/150/150">
   		</a>
   		<div class="media-body">
-            <h4 class="media-heading"><?php echo $item['first_name'].' '.$item['last_name']; ?></h4>
+            <h4 class="media-heading">
+              <a href="<?php echo base_url('profile/user/'.$item['id']); ?>">
+              <?php echo $item['first_name'].' '.$item['last_name']; ?>
+              </a>
+            </h4>
             <p><?php echo $item['institution'] ?></p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-Aliquam in felis sit amet augue.</p>
+          <p><?php echo $item['short_bio'] ?></p>
             <!--
           <ul class="list-inline list-unstyled">
   			<li><span><i class="glyphicon glyphicon-calendar"></i> 2 days, 8 hours </span></li>
@@ -35,7 +36,11 @@ Aliquam in felis sit amet augue.</p>
             </li>
 			</ul>
             -->
-            <a class="btn btn-primary" href="<?php echo base_url('follow?rid='.$item['id']); ?>" role="button">Follow</a>
+            <?php if($item['relation']) : ?>
+              <a class="btn btn-success" href="#" role="button">Following</a>
+            <?php else: ?>
+              <a class="btn btn-primary" href="<?php echo base_url('follow?rid='.$item['id']); ?>" role="button">Follow</a>
+            <?php endif;  ?>
        </div>
     </div>
   </div>

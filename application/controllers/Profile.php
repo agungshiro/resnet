@@ -81,6 +81,34 @@ class Profile extends Private_Controller {
         $data['content'] = $this->load->view('user/profile', $content_data, TRUE);
         $this->load->view($this->template, $data);
     }
+
+    public function user($id) {
+
+        if(!$user_data = $this->users_model->get_user($id)) {
+            
+            redirect('404');
+        
+        } else {
+
+            // setup page header data
+            $this->set_title(lang('users title profile'));
+            $this->add_css_theme("profile.css");
+
+            $data = $this->includes;
+
+            // set content data
+            $content_data = array(
+                'user'              => $user_data
+            );
+
+            // load views
+            //$data['content'] = $this->load->view('user/profile_form', $content_data, TRUE);
+            $data['content'] = $this->load->view('user/profile', $content_data, TRUE);
+            $this->load->view($this->template, $data);
+
+        }
+
+    }
     
     public function edit() {
 

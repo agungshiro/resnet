@@ -19,6 +19,11 @@ class Welcome extends Public_Controller {
      */
 	function index()
 	{
+
+        if ($this->session->userdata('logged_in'))  {
+            redirect(base_url('timeline'));
+        }
+        
         // setup page header data
         $this->set_title(sprintf(lang('welcome title'), $this->settings->site_name));
 

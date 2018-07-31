@@ -27,7 +27,7 @@ class Follow extends Private_Controller {
             $myname = $my_data['first_name']." ".$my_data['last_name'];
 
             $this->friendship_model->request_follow($data);
-            $this->notification->follow_notif($data['mid'],$data['yid'],$myname);
+            $this->notification->follow_notif($data['mid'],$data['yid'],$myname );
 
             redirect(base_url('profile'));
 
