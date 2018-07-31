@@ -66,6 +66,7 @@ class Profile extends Private_Controller {
         // setup page header data
         $this->set_title(lang('users title profile'));
         $this->add_css_theme("profile.css");
+        $this->add_css_theme("timeline.css");
 
         $data = $this->includes;
 
@@ -93,7 +94,7 @@ class Profile extends Private_Controller {
             // setup page header data
             $this->set_title(lang('users title profile'));
             $this->add_css_theme("profile.css");
-
+            $this->add_css_theme("timeline.css");
             $data = $this->includes;
 
             // set content data

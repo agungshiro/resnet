@@ -12,6 +12,8 @@ class Timeline extends Private_Controller {
         // setup page header data
         $this->set_title(sprintf('My Timeline', $this->settings->site_name));
 
+        $this->add_css_theme("timeline.css");
+
         $data = $this->includes;
 
         // set content data
