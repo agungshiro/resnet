@@ -75,6 +75,9 @@
     
         <div class="timeline-centered">
 
+
+        <?php foreach ($my_activity as $act): ?>
+
         <article class="timeline-entry">
 
             <div class="timeline-entry-inner">
@@ -84,12 +87,14 @@
                 </div>
 
                 <div class="timeline-label">
-                    <h2><a href="#">Art Ramadani</a> <span>posted a status update</span></h2>
-                    <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>
+                    <h2><a href="#"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>posted on <?php echo $act['datetime']; ?></span></h2>
+                    <p><?php echo $act['content'] ?></p>
                 </div>
-            </div>
+            
 
         </article>
+
+        <?php endforeach; ?>
 
 
         

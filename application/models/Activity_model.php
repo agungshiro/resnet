@@ -40,8 +40,25 @@ class Activity_model extends CI_Model {
         
     }
 
-    public function get_my_activity($id) {
+    public function get_my_activity($id=NULL) {
+        if($id) {
 
+            $sql = "
+                SELECT * 
+                FROM {$this->_db} 
+                WHERE user_id = {$this->db->escape($id)} 
+                ORDER BY id DESC
+            ";
+
+            $query = $this->db->query($sql);
+
+            if($query->num_rows()) {
+                return $query->result_array();
+            }
+
+        }
+
+        return FALSE;
     }
 
     public function get_timeline($id) {

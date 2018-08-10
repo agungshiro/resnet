@@ -28,6 +28,9 @@ class Profile extends Private_Controller {
 	function index()
 	{
         $user_data = $this->users_model->get_user($this->user['id']);
+        
+        $this->load->model('activity_model');
+        $my_activity = $this->activity_model->get_my_activity($this->user['id']);
 
         // setup page header data
         $this->set_title(lang('users title profile'));
@@ -40,6 +43,7 @@ class Profile extends Private_Controller {
         $content_data = array(
             'cancel_url'        => base_url(),
             'user'              => $user_data,
+            'my_activity'       => $my_activity,
             'password_required' => FALSE
         );
 
