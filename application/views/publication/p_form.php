@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<?php echo form_open('', array('role'=>'form')); ?>
+<?php echo form_open('profile/input_post', array('role'=>'form')); ?>
 
     <div class="row">
         <?php // username ?>

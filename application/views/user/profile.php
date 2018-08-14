@@ -48,6 +48,8 @@
 
 <div class="container">
     <div class="list-group">
+    
+    <?php foreach($publication as $p): ?>
 
     <a href="#" class="list-group-item">
         
@@ -58,8 +60,8 @@
         </div>
         
         <div class="pull-left form-control-inline">
-            <h4 class="list-group-item-heading">Publication Title</h4>
-            <p class="list-group-item-text">Pubication Abstract</p>			
+            <h4 class="list-group-item-heading"><?php echo $p['title'] ?></h4>
+            <p class="list-group-item-text"><?php echo $p['abstract'] ?></p>			
         </div>
 
         <span class="label label-danger pull-right">--</span>
@@ -68,8 +70,12 @@
         
     </a>
 
+    <?php endforeach; ?>
+
     </div>
+    <a class="btn btn-primary" href="<?php echo base_url('profile/add_publication'); ?>" role="button">Add Publication</a>
 </div>
+</br></br>
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>

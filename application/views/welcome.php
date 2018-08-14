@@ -20,7 +20,7 @@
       <div class="slide-1"></div>
       <div class="hero">
         <hgroup>
-            <h1>RESNET</h1>        
+            <h1>CONIDRES/h1>        
             <h3>Welcome to our project landing page</h3>
         </hgroup>
         <button class="btn btn-hero btn-lg" role="button">See all features</button>

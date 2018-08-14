@@ -174,8 +174,8 @@
                 | PHP v<?php echo phpversion(); ?>
                 | MySQL v<?php echo mysqli_get_client_version(); ?>
                 | CodeIgniter v<?php echo CI_VERSION; ?>
-                | <?php echo $this->settings->site_name; ?> v<?php echo $this->settings->site_version; ?>
-                | <a href="http://jasonbaier.github.io/ci3-fire-starter/" target="_blank">Github.com</a>
+                | <?php echo $this->settings->site_name; ?> (beta-dev)
+                | <a href="https://github.com/agungshiro/resnet" target="_blank">Github.com</a>
             </p>
         </div>
     </footer>

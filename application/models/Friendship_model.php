@@ -29,7 +29,7 @@ class Friendship_model extends CI_Model {
 
             if ($id = $this->db->insert_id())
             {
-                $this->do_update($data['mid']);
+                //$this->do_update($data['mid']);
                 return $id;
             }
         }

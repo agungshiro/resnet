@@ -30,6 +30,7 @@ class Profile extends Private_Controller {
         $user_data = $this->users_model->get_user($this->user['id']);
         
         $this->load->model('activity_model');
+        $this->load->model('publication_model');
         $my_activity = $this->activity_model->get_my_activity($this->user['id']);
 
         // setup page header data
@@ -44,7 +45,8 @@ class Profile extends Private_Controller {
             'cancel_url'        => base_url(),
             'user'              => $user_data,
             'my_activity'       => $my_activity,
-            'password_required' => FALSE
+            'password_required' => FALSE,
+            'publication'       => $this->publication_model->get_my_publication($this->user['id'])
         );
 
         // load views
@@ -158,8 +160,19 @@ class Profile extends Private_Controller {
         $this->load->view($this->template, $data);
     }
 
-    public function input_publication() {
-        
+    public function input_post() {
+        $this->load->model('publication_model');
+
+        $data = array();
+        $data['user_id'] = $this->user['id'];
+        $data['title'] = $this->input->post('title');
+        $data['link'] = $this->input->post('link');
+        $data['abstract'] = $this->input->post('abstract');
+
+        $this->publication_model->add_publication($data);
+
+        redirect(base_url('profile'));
+
     }
 
 
