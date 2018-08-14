@@ -36,11 +36,16 @@
             </li>
 			</ul>
             -->
-            <?php if($item['relation']) : ?>
+            <?php if ($item['id'] != $this->user['id']) :?>
+            <?php if($item['following'] || $item['follback'] == 'friend' ) : ?>
               <a class="btn btn-success" href="#" role="button">Following</a>
+              <a class="btn btn-danger" href="<?php echo base_url('unfollow?rid='.$item['id']); ?>" role="button">Unfollow</a>
+            <?php elseif ($item['follback'] == 'ignored'): ?>
+              <a class="btn btn-warning" href="<?php echo base_url('unfollow?rid='.$item['id']); ?>" role="button">Follow Back</a>
             <?php else: ?>
               <a class="btn btn-primary" href="<?php echo base_url('follow?rid='.$item['id']); ?>" role="button">Follow</a>
             <?php endif;  ?>
+            <?php endif;?>
        </div>
     </div>
   </div>

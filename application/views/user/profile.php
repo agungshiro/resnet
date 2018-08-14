@@ -32,7 +32,7 @@
             </div>
            
         </div>
-    </div>   
+    </div>
     
 	<div class="row nav">    
         <div class="col-md-4"></div>
@@ -43,6 +43,31 @@
             <div class="col-md-4 col-xs-4 well"><i class="fa fa-thumbs-o-up fa-lg"></i> 26</div>
         -->
         </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="list-group">
+
+    <a href="#" class="list-group-item">
+        
+        <div class="checkbox pull-left">
+            <label>
+                <input type="checkbox" value="">				
+            </label>
+        </div>
+        
+        <div class="pull-left form-control-inline">
+            <h4 class="list-group-item-heading">Publication Title</h4>
+            <p class="list-group-item-text">Pubication Abstract</p>			
+        </div>
+
+        <span class="label label-danger pull-right">--</span>
+        
+        <div class="clearfix"></div>
+        
+    </a>
+
     </div>
 </div>
 

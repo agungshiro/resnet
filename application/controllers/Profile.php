@@ -139,6 +139,29 @@ class Profile extends Private_Controller {
 
     }
 
+    public function add_publication() {
+        $this->set_title(lang('users title profile'));
+        $this->add_css_theme("profile.css");
+
+        $data = $this->includes;
+
+        // set content data
+        $content_data = array(
+            'cancel_url'        => base_url(),
+            'user'              => $this->user,
+            'password_required' => FALSE
+        );
+
+        // load views
+        $data['content'] = $this->load->view('publication/p_form', $content_data, TRUE);
+        //$data['content'] = $this->load->view('user/profile', $content_data, TRUE);
+        $this->load->view($this->template, $data);
+    }
+
+    public function input_publication() {
+        
+    }
+
 
     /**************************************************************************************
      * PRIVATE VALIDATION CALLBACK FUNCTIONS

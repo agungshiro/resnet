@@ -21,7 +21,7 @@ class Search extends Private_Controller {
         $term = $this->input->get('term') ? $this->input->get('term', TRUE) : DEFAULT_TERM;
 
         // get list
-        $srch = $this->users_model->search($term,$limit, $offset);
+        $srch = $this->users_model->search($term,$limit, $offset,$this->user['id']);
 
         // build pagination
         $this->pagination->initialize(array(

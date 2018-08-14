@@ -72,15 +72,58 @@ class Users_model extends CI_Model {
         return $results;
     }
 
-    function search($kw, $limit=0, $offset=0) {
+    function search($kw, $limit=0, $offset=0, $uid = NULL) {
+        /*
         $sql = "
-            SELECT SQL_CALC_FOUND_ROWS *
-            FROM {$this->_db} u
-            LEFT JOIN friendship f 
+            SELECT DISTINCT SQL_CALC_FOUND_ROWS *, 
+            f.relation AS rel_fol, 
+            f2.relation AS rel_fol_back 
+            FROM {$this->_db} AS u
+            LEFT JOIN friendship AS f 
             ON u.id = f.user2 
+            LEFT JOIN friendship AS f2 
+            ON f2.user1 = u.id  
             WHERE deleted = '0' 
-            AND first_name LIKE '%{$kw}%' 
-            OR last_name LIKE '%{$kw}%' 
+            AND u.first_name LIKE '%{$kw}%' 
+            OR u.last_name LIKE '%{$kw}%' 
+        ";*/
+
+        /*
+        $sql = "
+            SELECT DISTINCT SQL_CALC_FOUND_ROWS u.*, 
+            f1.relation AS fol,
+            f2.relation AS fol_back 
+            FROM users AS u,
+            friendship AS f1,
+            friendship AS f2
+            WHERE deleted = '0'
+            AND ( f1.user2 = u.id OR f2.user1 = u.id )
+            AND u.first_name LIKE '%{$kw}%' 
+            OR u.last_name LIKE '%{$kw}%' 
+        ";*/
+
+        $sql = "
+            SELECT SQL_CALC_FOUND_ROWS * ";
+
+        if($uid != NULL):
+
+        $sql .= "
+            ,(  SELECT relation 
+                FROM friendship AS f 
+                WHERE f.user2 = u.id 
+                AND f.user1 = {$uid}) AS following
+            ,(  SELECT relation 
+                FROM friendship AS f 
+                WHERE f.user1 = u.id 
+                AND f.user2 = {$uid}) AS follback ";
+        
+        endif;
+
+        $sql .= " 
+            FROM {$this->_db} AS u  
+            WHERE deleted = '0' 
+            AND u.first_name LIKE '%{$kw}%' 
+            OR u.last_name LIKE '%{$kw}%'
         ";
 
         if ($limit)
